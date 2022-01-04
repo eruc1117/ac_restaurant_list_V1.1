@@ -14,8 +14,8 @@ app.engine('handlebars', exhdbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 //載入restaurant.json
-let restaurantListJson = require('./restaurant.json')
-let restaurantList = restaurantListJson.results
+const restaurantListJson = require('./restaurant.json')
+let restaurantList = modules.forHandlebasIf(restaurantListJson)
 
 //使用public設定
 app.use(express.static('public'))

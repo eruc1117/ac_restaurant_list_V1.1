@@ -7,11 +7,14 @@ const exhdbs = require('express-handlebars')
 //設定使用handlebars
 app.engine('handlebars', exhdbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+//載入restaurant.json
+let restaurantListJson = require('./restaurant.json')
+let restaurantList = restaurantListJson.results
 //使用public設定
 app.use(express.static('public'))
 //get取得頁面
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', { restaurantList })
 })
 //設定port
 app.listen(port, () => {

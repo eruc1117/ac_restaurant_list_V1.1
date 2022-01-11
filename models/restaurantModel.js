@@ -43,7 +43,7 @@ const restaurantSchema = new Schema({
   },
   sameName: {
     type: Boolean,
-    required: true
+    required: false
   }
 })
 

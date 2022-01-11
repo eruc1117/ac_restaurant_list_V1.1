@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto">
+      <form action="/restaurants/edit/{{ restaurant._id }}" method="POST">
+        <div class="form-group">
+          <label for="restaurantName">Name</label>
+          <input type="text" class="form-control" name="name" value="{{restaurant.name}}">
+        </div>
+        <div class="form-group">
+          <label for="restaurantName_en">Name_en</label>
+          <input type="text" class="form-control" name="name_en" value="{{restaurant.name_en}}">
+          <small id="emailHelp" class="form-text text-muted">隨便寫點英文</small>
+        </div>
+        <div class="form-group">
+          <label for="restaurantCategory">Category</label>
+          <input type="text" class="form-control" name="category" value="{{restaurant.category}}">
+          <small id="emailHelp" class="form-text text-muted">隨便寫</small>
+        </div>
+        <div class="form-group">
+          <label for="restaurantImage">Image</label>
+          <input type="text" class="form-control" name="image" value="{{restaurant.image}}">
+          <small id="emailHelp" class="form-text text-muted">這邊只能用網址啦</small>
+          <div>
+            <img src="{{restaurant.image}}" style="width: 300px; height: 200px;" alt="你打錯了">
+          </div>
+          <!--增加圖片預覽-->
+        </div>
+        <div class="form-group">
+          <label for="restaurantLocation">Location</label>
+          <input type="text" class="form-control" name="location" value="{{restaurant.location}}">
+          <small id="emailHelp" class="form-text text-muted">隨便寫</small>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control text-center" name="phone" value="{{restaurant.phone}}" max=99999999>
+          <small id="emailHelp" class="form-text text-muted">隨便寫</small>
+        </div>
+
+        <div class="form-group">
+          <label for="restaurantGoogleMap">GoogleMap</label>
+          <input type="text" class="form-control" name="GoogleMap" value="{{restaurant.google_map}}">
+          <small id="emailHelp" class="form-text text-muted">隨便寫</small>
+        </div>
+
+        <div class="form-group">
+          <label for="customRange3">Rating</label>
+          <div class="edit-me" id="rating">{{restaurant.rating}}</div>
+          <input type="number" class="form-control" id="exa" rows="3" name="rating" value="{{restaurant.rating}}"
+            step="0.1" max=5 min=0>
+          <!--增加數字顯示-->
+        </div>
+
+        <div class="form-group">
+          <label for="restaurantDescription">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlTextarea1" name="description"
+            value="{{restaurant.description}}">
+          <!--原本要用<textarea>，不過<textarea>不支援input-->
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/">Home</a>
+      </form>
+    </div>
+  </div>
+</div>

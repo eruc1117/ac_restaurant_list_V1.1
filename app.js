@@ -11,10 +11,11 @@ const handlebars = exhdbs.create({
 
 //載入mongoose
 const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/restaurant_test')
 
 //載入restaurantModel
 const restaurantModel = require('./models/restaurantModel')
-mongoose.connect('mongodb://localhost/restaurant_test')
+
 
 //載入modules，使用自製模組
 const modules = require('./modules')
@@ -28,6 +29,8 @@ app.set('views', './views');
 
 //使用public設定
 app.use(express.static('public'))
+//表單資料處理
+app.use(express.urlencoded({ extended: true }))
 //get取得頁面
 app.get('/', (req, res) => {
   restaurantModel.find()
@@ -42,6 +45,44 @@ app.get('/restaurants/detail/:id', (req, res) => {
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.error(error))
+})
+
+//修改頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return restaurantModel.findById(id)
+    .lean()
+    .then(restaurant => res.render('addrestaurant', { restaurant }))
+    .catch(error => console.error(error))
+})
+
+app.post('/restaurants/edit/:id', (req, res) => {
+  //肯定能用array處理
+  const id = req.params.id
+  const name = req.body.name
+  const name_en = req.body.name_en
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.GoogleMap
+  const rating = req.body.rating
+  const description = req.body.description
+  return restaurantModel.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.name_en = name_en
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/detail/${id}`))
+    .catch(error => console.log(error))
 })
 
 //搜索功能

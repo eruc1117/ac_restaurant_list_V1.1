@@ -22,29 +22,38 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurantList}}
-        <a href="/restaurants/1" class="text-secondary">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-            <div class="card-body p-3">
-              {{#if this.sameName}}
-              <h5 class="card-title mb-1">{{this.name}}</h5>
-              <h6 class="card-title mb-1">{{this.name_en}}</h6>
-              {{else}}
-              <h5 class="card-title mb-1">{{this.name}}</h5>
-              {{/if}}
+        <div>
+          <a href="./restaurants/detail/{{ this._id }}" class="text-secondary">
+            <div class="card mb-3">
+              <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+              <div class="card-body p-3">
+                {{#if this.sameName}}
+                <h5 class="card-title mb-1">{{this.name}}</h5>
+                <h6 class="card-title mb-1">{{this.name_en}}</h6>
+                {{else}}
+                <h5 class="card-title mb-1">{{this.name}}</h5>
+                {{/if}}
 
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{this.category}}
+                <div class="restaurant-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i> {{this.category}}
+                </div>
+
+                <span class="badge badge-pill badge-danger font-weight-normal">
+                  {{this.rating}}
+                  <i class="fas fa-star fa-xs"></i>
+                </span>
+
               </div>
-
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
+              <div class="text-right">
+                <a href="./restaurants/{{ this._id }}">edit</a>
+                <a href="./restaurants/detail/{{ this._id }}">Detail</a>
+                <form action="./restaurants/delete/{{ this._id }}" method="POST" style="display: inline;">
+                  <button type="submit">delete</button>
+                </form>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         {{/each}}
       </div>
     </div>

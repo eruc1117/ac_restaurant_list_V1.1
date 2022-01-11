@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const restaurantModel = require('../restaurantModel') // 載入 restaurantModel
 //載入restaurant.json
-const restaurantListJson = require('../restaurant.json')
+const restaurantListJson = require('./restaurant.json')
 let restaurantList = forHandlebasIf(restaurantListJson)
 
 

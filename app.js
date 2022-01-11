@@ -9,6 +9,13 @@ const exhdbs = require('express-handlebars')
 const handlebars = exhdbs.create({
 })
 
+//載入mongoose
+const mongoose = require('mongoose')
+
+//載入restaurantModel
+const restaurantModel = require('./models/restaurantModel')
+mongoose.connect('mongodb://localhost/restaurant_test')
+
 //載入modules，使用自製模組
 const modules = require('./modules')
 
@@ -18,15 +25,15 @@ app.engine('.handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 app.set('views', './views');
 
-//載入restaurant.json
-const restaurantListJson = require('./restaurant.json')
-let restaurantList = modules.forHandlebasIf(restaurantListJson)
 
 //使用public設定
 app.use(express.static('public'))
 //get取得頁面
 app.get('/', (req, res) => {
-  res.render('index', { restaurantList })
+  restaurantModel.find()
+    .lean()
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
 })
 //顯示餐廳詳細資料
 app.get('/restaurants/:restaurant_id', (req, res) => {

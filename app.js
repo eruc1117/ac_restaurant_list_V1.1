@@ -52,7 +52,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
-    .then(restaurant => res.render('addrestaurant', { restaurant }))
+    .then(restaurant => res.render('editrestaurant', { restaurant }))
     .catch(error => console.error(error))
 })
 

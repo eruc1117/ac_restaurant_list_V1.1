@@ -57,7 +57,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants/edit/:id', (req, res) => {
-  //肯定能用array處理
+  //肯定能用array處理，不過資料庫格式要改嗎？
   const id = req.params.id
   const name = req.body.name
   const name_en = req.body.name_en

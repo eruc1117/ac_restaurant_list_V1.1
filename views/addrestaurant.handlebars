@@ -16,14 +16,17 @@
           <input type="text" class="form-control" name="category" value="{{restaurant.category}}">
           <small id="emailHelp" class="form-text text-muted">隨便寫</small>
         </div>
+
         <div class="form-group">
           <label for="restaurantImage">Image</label>
-          <input type="text" class="form-control" name="image" value="{{restaurant.image}}">
-          <small id="emailHelp" class="form-text text-muted">這邊只能用網址啦</small>
+          <input type="text" class="form-control" id="imageInupt" name="image" value="{{restaurant.image}}">
+          <small id="imageHelp" class="form-text text-muted">這邊只能用網址啦</small>
           <div>
-            <img src="{{restaurant.image}}" style="width: 300px; height: 200px;" alt="你打錯了">
+            <!--增加圖片預覽-->
+            <img src="{{restaurant.image}}" id="preview" style="width: 300px; height: 200px;" alt="你打錯了">
+            <button type="button" id="previewButton" class="btn btn-primary">預覽</button>
           </div>
-          <!--增加圖片預覽-->
+
         </div>
         <div class="form-group">
           <label for="restaurantLocation">Location</label>
@@ -32,8 +35,9 @@
         </div>
 
         <div class="form-group">
-          <input type="text" class="form-control text-center" name="phone" value="{{restaurant.phone}}" max=99999999>
-          <small id="emailHelp" class="form-text text-muted">隨便寫</small>
+          <input type="tel" class="form-control text-center" name="phone" value="{{restaurant.phone}}"
+            pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}"><!--決定電話號碼格式-->
+          <small id="emailHelp" class="form-text text-muted">格式:xx-xxxx-xxxx</small>
         </div>
 
         <div class="form-group">
@@ -45,12 +49,12 @@
         <div class="form-group">
           <label for="customRange3">Rating</label>
           <div class="edit-me" id="rating">{{restaurant.rating}}</div>
-          <input type="number" class="form-control" id="exa" rows="3" name="rating" value="{{restaurant.rating}}"
-            step="0.1" max=5 min=0>
+          <input type="range" class="custom-range" id="ratingRange" name="rating" value="{{restaurant.rating}}" min=0
+            max=5 step=0.1>
           <!--增加數字顯示-->
         </div>
 
-        <div class="form-group">
+        <div class=" form-group">
           <label for="restaurantDescription">Description</label>
           <input type="text" class="form-control" id="exampleFormControlTextarea1" name="description"
             value="{{restaurant.description}}">

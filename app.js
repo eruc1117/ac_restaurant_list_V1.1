@@ -6,12 +6,17 @@ const port = 3000
 //載入handlebars
 const exhdbs = require('express-handlebars')
 
+const handlebars = exhdbs.create({
+})
+
 //載入modules，使用自製模組
 const modules = require('./modules')
 
 //設定使用handlebars
-app.engine('handlebars', exhdbs({ defaultLayout: 'main' }))
+//express-handlebars ^5到^6的改動
+app.engine('.handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
+app.set('views', './views');
 
 //載入restaurant.json
 const restaurantListJson = require('./restaurant.json')
@@ -37,7 +42,7 @@ app.get('/search', (req, res) => {
     return restaurant.name.toLowerCase().includes(keyword) || restaurant.name_en.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes()
     //思考了一下關於這裡name跟name_en的優先順序，首先filter會篩選出true的項目，由於name在||前，當name符合keyword時先回傳值，此時不會對name_en進行驗證，所以優先程度上是以name為優先
   })
-  restaurantList.length === 0 ? res.render('nonSearchResult', { searchResult }) : res.render('index', { restaurantList, searchResult})
+  restaurantList.length === 0 ? res.render('nonSearchResult', { searchResult }) : res.render('index', { restaurantList, searchResult })
 })
 
 //設定port

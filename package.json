@@ -1,18 +1,26 @@
 {
-  "name": "restaurant_list",
+  "name": "ac_restaurant_list_v1.1",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "顯示全部餐廳(簡單資料)，或是點擊後顯示詳細資料",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eruc1117/ac_restaurant_list_V1.1.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eruc1117/ac_restaurant_list_V1.1/issues"
+  },
+  "homepage": "https://github.com/eruc1117/ac_restaurant_list_V1.1#readme",
   "dependencies": {
     "express": "^4.17.2",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^6.0.2"
   }
 }

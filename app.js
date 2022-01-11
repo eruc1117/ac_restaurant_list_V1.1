@@ -85,6 +85,15 @@ app.post('/restaurants/edit/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//刪除功能
+app.post('/restaurants/delete/:id', (req, res) => {
+  const id = req.params.id
+  return restaurantModel.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 //搜索功能
 app.get('/search', (req, res) => {
   const searchResult = req.query.keyword

@@ -36,9 +36,12 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 //顯示餐廳詳細資料
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.find(element => element.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant })
+app.get('/restaurants/detail/:id', (req, res) => {
+  const id = req.params.id
+  return restaurantModel.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.error(error))
 })
 
 //搜索功能

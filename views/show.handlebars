@@ -38,4 +38,17 @@
         style="max-width: 600px;">
     </div>
   </div>
+  <div class="row mx-auto fixed-bottom">
+    <div class="col px-md-5">
+      <a class="btn btn-primary " href="/" role="button">Home</a>
+    </div>
+    <div class="col px-md-5">
+      <a class="btn btn-primary " href="./restaurants/{{ this._id }} role=" button"">edit</a>
+    </div>
+    <div class="col px-md-5">
+      <form action="./restaurants/delete/{{ this._id }}" method="POST" style="display: inline;">
+        <button class="btn btn-primary " type="submit">delete</button>
+      </form>
+    </div>
+  </div>
 </div>

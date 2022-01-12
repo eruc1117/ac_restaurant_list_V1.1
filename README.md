@@ -1,12 +1,16 @@
 # ac_restaurant_list
-顯示全部餐廳(簡單資料)，或是點擊後顯示詳細資料
+顯示全部餐廳(簡單資料)，或是點擊後顯示詳細資料，能夠修改或刪除餐廳資料
 
 
 
 ### Function list
 
-- 能以中文或英文的店名進行搜尋
-- 點擊餐廳顯示詳細資料
+- 能以中英文的店名或餐廳種類進行搜尋
+- 點擊餐廳圖片或detail顯示詳細資料
+- 在詳細資料頁面可以透過下方Home按鈕回到首頁
+- 透過edit連結進入餐廳修改頁面
+- 在餐廳修改頁面可以預覽圖片，rating隨著調整變化
+- 點擊delete刪除餐廳
 - 點擊左上角我的餐廳清單回到初始頁面(顯示全部餐廳)
 
 ### Installing
@@ -15,7 +19,9 @@
 ```
 "node.js"
 "express": "^4.17.2",
-"express-handlebars": "^3.0.0"
+"express-handlebars": "^6.0.2"
+"mongoose": "^5.9.7"
+MongoDB
 ```
 開啟終端機(Terminal)，cd到存放專案本機位置並執行
 ```
@@ -29,8 +35,20 @@ npm i express
 ```
 安裝 express handlebars
 ```
-npm i express-handlebars@3.0.0 
+npm i express-handlebars@6.0.2 
 ```
+確認與MongoDB連線
+
+安裝 Mongoose
+```
+npm install mongoose
+```
+
+製作種子資料
+```
+npm run seed
+```
+
 執行
 ```
 nodemon app.js
@@ -42,8 +60,8 @@ nodemon app.js
 ![image](index.png)
 顯示餐廳詳細資料
 ![image](show.png)
-顯示無搜尋結果的頁面
-![image](NonsearchResult.png)
+顯示edit頁面
+![image](editPaage.png)
 
 ## 顯示方式不合預期
 ![image](wow.png)

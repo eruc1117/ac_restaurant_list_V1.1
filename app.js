@@ -78,9 +78,12 @@ app.post('/restaurants/delete/:id', (req, res) => {
 app.get('/search', (req, res) => {
   const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
   const reg = new RegExp(keyword, 'i')
+
   restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }] })
     .lean()
-    .then(restaurantList => restaurantList.length === 0 ? res.redirect('/') : res.render('index', { restaurantList }))
+    .then(restaurantList => restaurantList.length === 0
+      ? res.render('nonsearchResult')
+      : res.render('index', { restaurantList }))
     .catch(error => console.log('error:' + error))
 })
 

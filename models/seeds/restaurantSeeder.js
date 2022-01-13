@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 const restaurantModel = require('../restaurantModel') // 載入 restaurantModel
+
+//載入modules，使用自製模組
+const modules = require('../modules')
+
 //載入restaurant.json
 const restaurantListJson = require('./restaurant.json')
-let restaurantList = forHandlebasIf(restaurantListJson)
+let restaurantList = modules.predataEdit(restaurantListJson)
 
 
 mongoose.connect('mongodb://localhost/restaurant_test')
@@ -29,17 +33,3 @@ db.once('open', () => {
   }
   console.log('done')
 })
-
-function forHandlebasIf(array) {//先對資料進行處理，增加sameName作為key，名稱和英文名稱(name and name_en)完全相同value為false，不同為true
-  let list = array.results
-
-  for (let index = 0; index < list.length; index++) {
-
-    if (list[index].name === list[index].name_en) {
-      list[index].sameName = false
-    } else {
-      list[index].sameName = true
-    }
-  }
-  return list
-}

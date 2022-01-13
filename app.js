@@ -18,7 +18,7 @@ const restaurantModel = require('./models/restaurantModel')
 
 
 //載入modules，使用自製模組
-const modules = require('./modules')
+const modules = require('./models/modules')
 
 //設定使用handlebars
 //express-handlebars ^5到^6的改動

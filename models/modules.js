@@ -25,11 +25,14 @@ function creatKeyWords(array) {//重構文字，保留詞之間的空白
   return words
 }
 
-function forHandlebasIf(array) {//先對資料進行處理，增加sameName作為key，名稱和英文名稱(name and name_en)完全相同value為false，不同為true
+function predataEdit(array) {
   let list = array.results
 
   for (let index = 0; index < list.length; index++) {
-
+    //補充對電話號碼格式的修改，比較符合習慣
+    let newPhone = list[index].phone.replace(/[\s]/g, '-')
+    list[index].phone = newPhone
+    //先對資料進行處理，增加sameName作為key，名稱和英文名稱(name and name_en)完全相同value為false，不同為true
     if (list[index].name === list[index].name_en) {
       list[index].sameName = false
     } else {
@@ -38,8 +41,10 @@ function forHandlebasIf(array) {//先對資料進行處理，增加sameName作�
   }
   return list
 }
+
+
 //將模組輸出
 module.exports = {
   removeBlank,
-  forHandlebasIf
+  predataEdit
 }

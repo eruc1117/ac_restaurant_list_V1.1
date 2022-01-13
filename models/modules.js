@@ -33,18 +33,31 @@ function predataEdit(array) {
     let newPhone = list[index].phone.replace(/[\s]/g, '-')
     list[index].phone = newPhone
     //先對資料進行處理，增加sameName作為key，名稱和英文名稱(name and name_en)完全相同value為false，不同為true
-    if (list[index].name === list[index].name_en) {
-      list[index].sameName = false
-    } else {
-      list[index].sameName = true
-    }
+    list.name === list.name_en ?
+      list.sameName = false :
+      list.sameName = true
   }
   return list
 }
+
+function bodyDataEdit(listBody) {
+  listBody.name = removeBlank(listBody.name)
+  listBody.name_en = removeBlank(listBody.name_en)
+  listBody.category = removeBlank(listBody.category)
+  listBody.location = removeBlank(listBody.location)
+  listBody.description = removeBlank(listBody.description)
+  listBody.name === listBody.name_en ?
+    listBody.sameName = false :
+    listBody.sameName = true
+  listBody
+  return listBody
+}
+
 
 
 //將模組輸出
 module.exports = {
   removeBlank,
-  predataEdit
+  predataEdit,
+  bodyDataEdit
 }

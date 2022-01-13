@@ -57,31 +57,11 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants/edit/:id', (req, res) => {
-  //肯定能用array處理，不過資料庫格式要改嗎？
-  const id = req.params.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.GoogleMap
-  const rating = req.body.rating
-  const description = req.body.description
-  return restaurantModel.findById(id)
-    .then(restaurant => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
-      return restaurant.save()
-    })
-    .then(() => res.redirect(`/restaurants/detail/${id}`))
+  const restaurant = req.params.id
+  const body = (req.body)
+  let newBody = modules.bodyDataEdit(body)
+  restaurantModel.findByIdAndUpdate(restaurant, newBody)
+    .then(() => res.redirect(`/restaurants/detail/${restaurant}`))
     .catch(error => console.log(error))
 })
 

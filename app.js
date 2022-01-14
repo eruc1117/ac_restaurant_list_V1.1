@@ -52,6 +52,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
+    .sort({ id: 1 })
     .then(restaurant => res.render('editrestaurant', { restaurant }))
     .catch(error => console.error(error))
 })

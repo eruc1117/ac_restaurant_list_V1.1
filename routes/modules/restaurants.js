@@ -1,51 +1,11 @@
-//設定express環境
+// 引用 Express 與 Express 路由器
 const express = require('express')
-const app = express()
-const port = 3000
-
-// 引用路由器
-const routes = require('./routes')
-// 將 request 導入路由器
-app.use(routes)
-
-
-//載入methodoverride
-const methodOverride = require('method-override')
-
-//載入handlebars
-const exhdbs = require('express-handlebars')
-
-const handlebars = exhdbs.create({
-})
-
-//載入mongoose
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/restaurant_test')
-
-//載入restaurantModel
-const restaurantModel = require('./models/restaurantModel')
-
-
-//載入modules，使用自製模組
-const modules = require('./models/modules')
-
-//設定使用handlebars
-//express-handlebars ^5到^6的改動
-app.engine('.handlebars', handlebars.engine)
-app.set('view engine', 'handlebars')
-app.set('views', './views');
-
-//使用method override
-app.use(methodOverride('_method'))
-
-//使用public設定
-app.use(express.static('public'))
-//表單資料處理
-app.use(express.urlencoded({ extended: true }))
-//get取得頁面
+const router = express.Router()
+// 引用 restaurantModel
+const restaurantModel = require('../../models/restaurantModel')
 
 //顯示餐廳詳細資料
-app.get('/restaurants/detail/:id', (req, res) => {
+router.get('/restaurants/detail/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
@@ -54,7 +14,7 @@ app.get('/restaurants/detail/:id', (req, res) => {
 })
 
 //修改頁面
-app.get('/restaurants/:id', (req, res) => {
+router.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
@@ -62,7 +22,7 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.put('/restaurants/:id', (req, res) => {
+router.put('/restaurants/:id', (req, res) => {
   const restaurant = req.params.id
   const body = (req.body)
   let newBody = modules.bodyDataEdit(body)
@@ -72,7 +32,7 @@ app.put('/restaurants/:id', (req, res) => {
 })
 
 //刪除功能
-app.delete('/restaurants/:id', (req, res) => {
+router.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .then(restaurant => restaurant.remove())
@@ -81,7 +41,7 @@ app.delete('/restaurants/:id', (req, res) => {
 })
 
 //搜索功能
-app.get('/search', (req, res) => {
+router.get('/search', (req, res) => {
   const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
   const reg = new RegExp(keyword, 'i')
 
@@ -93,8 +53,6 @@ app.get('/search', (req, res) => {
     .catch(error => console.log('error:' + error))
 })
 
+// 匯出路由模組
+module.exports = router
 
-//設定port
-app.listen(port, () => {
-  console.log(`localhost:${port}`)
-})

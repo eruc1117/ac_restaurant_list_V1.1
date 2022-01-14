@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+//載入methodoverride
+const methodOverride = require('method-override')
+
 //載入handlebars
 const exhdbs = require('express-handlebars')
 
@@ -26,6 +29,8 @@ app.engine('.handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 app.set('views', './views');
 
+//使用method override
+app.use(methodOverride('_method'))
 
 //使用public設定
 app.use(express.static('public'))
@@ -48,7 +53,7 @@ app.get('/restaurants/detail/:id', (req, res) => {
 })
 
 //修改頁面
-app.get('/restaurants/:id/edit', (req, res) => {
+app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
@@ -57,7 +62,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.post('/restaurants/edit/:id', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const restaurant = req.params.id
   const body = (req.body)
   let newBody = modules.bodyDataEdit(body)
@@ -67,7 +72,7 @@ app.post('/restaurants/edit/:id', (req, res) => {
 })
 
 //刪除功能
-app.post('/restaurants/delete/:id', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .then(restaurant => restaurant.remove())

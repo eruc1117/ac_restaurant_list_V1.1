@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <form action="/restaurants/edit/{{ restaurant._id }}" method="POST">
+      <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST">
         <div class="form-group">
           <label for="restaurantName">Name</label>
           <input type="text" class="form-control" name="name" value="{{restaurant.name}} " required>

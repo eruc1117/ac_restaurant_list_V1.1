@@ -43,10 +43,10 @@
       <a class="btn btn-primary " href="/" role="button">Home</a>
     </div>
     <div class="col px-md-5">
-      <a class="btn btn-primary " href="/restaurants/{{ restaurant._id }}/edit" role="button">edit</a>
+      <a class="btn btn-primary " href="/restaurants/{{ restaurant._id }}?method=GET" role="button">edit</a>
     </div>
     <div class="col px-md-5">
-      <form action="/restaurants/delete/{{ restaurant._id }}" method="POST" style="display: inline;">
+      <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="POST" style="display: inline;">
         <button class="btn btn-primary " type="submit">delete</button>
       </form>
     </div>

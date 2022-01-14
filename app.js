@@ -18,9 +18,8 @@ const exhdbs = require('express-handlebars')
 const handlebars = exhdbs.create({
 })
 
-//載入mongoose
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/restaurant_test')
+//連線mongoose
+require('./config/mongoose')
 
 //載入restaurantModel
 const restaurantModel = require('./models/restaurantModel')

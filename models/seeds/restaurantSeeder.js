@@ -1,6 +1,4 @@
-const mongoose = require('mongoose')
-const restaurantModel = require('../restaurantModel') // 載入 restaurantModel
-
+const db = require('../../config/mongoose')
 //載入modules，使用自製模組
 const modules = require('../modules')
 
@@ -8,12 +6,7 @@ const modules = require('../modules')
 const restaurantListJson = require('./restaurant.json')
 let restaurantList = modules.predataEdit(restaurantListJson)
 
-
-mongoose.connect('mongodb://localhost/restaurant_test')
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongodb error!')
-})
+//製作種子資料
 db.once('open', () => {
   console.log('mongodb connected!')
   for (element of restaurantList) {

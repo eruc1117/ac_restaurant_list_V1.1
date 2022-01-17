@@ -41,18 +41,6 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-//搜索功能
-router.get('/search', (req, res) => {
-  const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
-  const reg = new RegExp(keyword, 'i')
-
-  restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }] })
-    .lean()
-    .then(restaurantList => restaurantList.length === 0
-      ? res.render('nonsearchResult')
-      : res.render('index', { restaurantList }))
-    .catch(error => console.log('error:' + error))
-})
 
 // 匯出路由模組
 module.exports = router

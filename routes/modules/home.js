@@ -11,5 +11,33 @@ router.get('/', (req, res) => {
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
+router.get('/atoz', (req, res) => {
+  restaurantModel.find()
+    .lean()
+    .sort({ name: 1 })
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
+})
+router.get('/ztoa', (req, res) => {
+  restaurantModel.find()
+    .lean()
+    .sort({ name: -1 })
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
+})
+router.get('/category', (req, res) => {
+  restaurantModel.find()
+    .lean()
+    .sort({ category: 1 })
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
+})
+router.get('/area', (req, res) => {
+  restaurantModel.find()
+    .lean()
+    .sort({ location: 1 })
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
+})
 // 匯出路由模組
 module.exports = router

@@ -1,33 +1,31 @@
 <!-- search bar -->
 
-<div class="container search-bar d-flex">
-  <div class="search-bar-outer ml-5">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{ searchResult }}" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-          </div>
+<div class="row">
+  <div class="searchbar">
+    <form action="/search">
+      <div class="input-group mx-auto" id="search">
+        <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+          value="{{ searchResult }}" aria-describedby="search-button">
+        <div class="input-group-append">
+          <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
         </div>
+      </div>
+    </form>
+    <div class="dropdown show">
+      <form action="/?_method=GET" method="POST">
+        <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          sort
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="/atoz">A -> Z</a>
+          <a class="dropdown-item" href="/ztoa">Z -> A</a>
+          <a class="dropdown-item" href="/category">種類</a>
+          <a class="dropdown-item" href="/area">地區</a>
       </form>
     </div>
   </div>
-  <div class="dropdown ">
-    <a class="btn-secondary dropdown-toggle btn-lg bg-white text-body" href="#" role="button" id="dropdownMenuLink"
-      data-toggle="dropdown" aria-expanded="false">
-      Sort
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="#">A -> Z</a>
-      <a class="dropdown-item" href="#">Z -> A</a>
-      <a class="dropdown-item" href="#">類別</a>
-      <a class="dropdown-item" href="#">地區</a>
-    </div>
-  </div>
+</div>
 </div>
 
 <!-- restaurant list -->
@@ -36,37 +34,47 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurantList}}
-        <a href=" ./restaurants/detail/{{ this._id }}" class="text-secondary ">
-          <div class="card mb-3" style="height: 350px">
+        <div class="card mb-3" style="height: 350px">
+          <a href=" ./restaurants/detail/{{ this._id }}" class="text-secondary ">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-            <div class="card-body p-3">
-              {{#if this.sameName}}
-              <h5 class="card-title mb-1">{{this.name}}</h5>
-              <h6 class="card-title mb-1">{{this.name_en}}</h6>
-              {{else}}
-              <h5 class="card-title mb-1">{{this.name}}</h5>
-              {{/if}}
+          </a>
+          <div class="card-body p-3">
+            {{#if this.sameName}}
+            <h5 class="card-title mb-1">{{this.name}}</h5>
+            <h6 class="card-title mb-1">{{this.name_en}}</h6>
+            {{else}}
+            <h5 class="card-title mb-1">{{this.name}}</h5>
+            {{/if}}
 
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{this.category}}
-              </div>
-
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
-              <div class="text-right">
-                <a href="/restaurants/{{ this._id }}?_method=GET">edit</a>
-                <a href="/restaurants/detail/{{ this._id }}?_method=GET">Detail</a>
-                <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-                  <button type="submit">delete</button>
-                </form>
-              </div>
+            <div class="restaurant-category mb-1">
+              <i class="fas fa-utensils pr-2"></i> {{this.category}}
             </div>
+
+            <span class="badge badge-pill badge-danger font-weight-normal">
+              {{this.rating}}
+              <i class="fas fa-star fa-xs"></i>
+            </span>
           </div>
-        </a>
+          {{#if this.sameName}}
+          <div class="mt-0 text-right">
+            <a href="/restaurants/{{ this._id }}?_method=GET">edit</a>
+            <a href="/restaurants/detail/{{ this._id }}?_method=GET">Detail</a>
+            <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit">delete</button>
+            </form>
+          </div>
+          {{else}}
+          <div class="mt-4 text-right">
+            <a href="/restaurants/{{ this._id }}?_method=GET">edit</a>
+            <a href="/restaurants/detail/{{ this._id }}?_method=GET">Detail</a>
+            <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit">delete</button>
+            </form>
+          </div>
+          {{/if}}
+        </div>
         {{/each}}
       </div>
     </div>
   </div>
+</div>

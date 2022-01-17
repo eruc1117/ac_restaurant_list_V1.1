@@ -6,6 +6,9 @@ const modules = require('../modules')
 const restaurantListJson = require('./restaurant.json')
 let restaurantList = modules.predataEdit(restaurantListJson)
 
+//載入restaurantModel
+const restaurantModel = require('../restaurantModel')
+
 //製作種子資料
 db.once('open', () => {
   console.log('mongodb connected!')

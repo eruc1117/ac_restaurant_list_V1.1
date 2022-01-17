@@ -9,7 +9,7 @@ const home = require('./modules/home')
 router.use('/', home)
 
 const restaurants = require('./modules/restaurants')
-// 將網址結構符合 /restaurants 字串開頭的 request 導向 todos 模組 
+// 將網址結構符合 /restaurants 字串開頭的 request 導向 restaurants 模組 
 router.use('/restaurants', restaurants)
 
 // 匯出路由器

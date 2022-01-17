@@ -5,8 +5,6 @@ const port = 3000
 
 // 引用路由器
 const routes = require('./routes')
-// 將 request 導入路由器
-app.use(routes)
 
 
 //載入methodoverride
@@ -41,43 +39,10 @@ app.use(methodOverride('_method'))
 app.use(express.static('public'))
 //表單資料處理
 app.use(express.urlencoded({ extended: true }))
-//get取得頁面
 
-//顯示餐廳詳細資料
-app.get('/restaurants/detail/:id', (req, res) => {
-  const id = req.params.id
-  return restaurantModel.findById(id)
-    .lean()
-    .then(restaurant => res.render('show', { restaurant }))
-    .catch(error => console.error(error))
-})
+// 將 request 導入路由器
+app.use(routes)
 
-//修改頁面
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return restaurantModel.findById(id)
-    .lean()
-    .then(restaurant => res.render('editrestaurant', { restaurant }))
-    .catch(error => console.error(error))
-})
-
-app.put('/restaurants/:id', (req, res) => {
-  const restaurant = req.params.id
-  const body = (req.body)
-  let newBody = modules.bodyDataEdit(body)
-  restaurantModel.findByIdAndUpdate(restaurant, newBody)
-    .then(() => res.redirect(`/restaurants/detail/${restaurant}`))
-    .catch(error => console.log(error))
-})
-
-//刪除功能
-app.delete('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return restaurantModel.findById(id)
-    .then(restaurant => restaurant.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
 
 //搜索功能
 app.get('/search', (req, res) => {

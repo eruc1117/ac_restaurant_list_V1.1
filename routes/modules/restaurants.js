@@ -3,9 +3,10 @@ const express = require('express')
 const router = express.Router()
 // 引用 restaurantModel
 const restaurantModel = require('../../models/restaurantModel')
+const modules = require('../../models/modules')
 
 //顯示餐廳詳細資料
-router.get('/restaurants/detail/:id', (req, res) => {
+router.get('/detail/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
@@ -14,7 +15,7 @@ router.get('/restaurants/detail/:id', (req, res) => {
 })
 
 //修改頁面
-router.get('/restaurants/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .lean()
@@ -22,7 +23,7 @@ router.get('/restaurants/:id', (req, res) => {
     .catch(error => console.error(error))
 })
 
-router.put('/restaurants/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const restaurant = req.params.id
   const body = (req.body)
   let newBody = modules.bodyDataEdit(body)
@@ -32,7 +33,7 @@ router.put('/restaurants/:id', (req, res) => {
 })
 
 //刪除功能
-router.delete('/restaurants/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   return restaurantModel.findById(id)
     .then(restaurant => restaurant.remove())

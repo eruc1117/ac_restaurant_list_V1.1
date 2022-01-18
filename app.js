@@ -44,18 +44,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(routes)
 
 
-//搜索功能
-app.get('/search', (req, res) => {
-  const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
-  const reg = new RegExp(keyword, 'i')
 
-  restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }] })
-    .lean()
-    .then(restaurantList => restaurantList.length === 0
-      ? res.render('nonsearchResult')
-      : res.render('index', { restaurantList }))
-    .catch(error => console.log('error:' + error))
-})
 
 
 //設定port

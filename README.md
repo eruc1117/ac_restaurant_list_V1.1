@@ -12,6 +12,7 @@
 - 在餐廳修改頁面可以預覽圖片，rating隨著調整變化
 - 點擊delete刪除餐廳
 - 點擊左上角我的餐廳清單回到初始頁面(顯示全部餐廳)
+- 透過sort按鈕更改餐廳排列順序
 
 ### Installing
 
@@ -56,14 +57,31 @@ nodemon app.js
 將terminal顯示的localhost:3000貼到網頁上執行
 
 ## Running the tests
-顯示全數餐廳(或是搜尋結果)
-![image](index.png)
-顯示餐廳詳細資料
-![image](show.png)
-顯示edit頁面
-![image](editPaage.png)
+顯示全數餐廳，以id進行升序排列，最一開始所進入的頁面
+![image](screenshot/index_sort_by_id.png)
 
-## 顯示方式不合預期
-![image](wow.png)
-直覺是從左到右，看起來似乎是右到左
+以資料中name進行升序排列
+![image](screenshot/index_sort_by_name_AtoZ.png)
+
+
+以資料中name進行降序排列
+![image](screenshot/index_sort_by_name_ZtoA.png)
+
+
+以資料中category進行升序排列
+![image](screenshot/index_sort_by_category.png)
+
+
+以資料中location進行升序排列
+![image](screenshot/index_sort_by_area.png)
+
+顯示餐廳詳細資料
+![image](screenshot/show.png)
+
+顯示edit頁面
+![image](screenshot/editPaage.png)
+在頁面中增加預覽圖片功能，使用者可以先檢查輸入是否正確，修改資料時透過簡化輸入方式，讓使用者直接選取rating分數，減少使用者輸入，
+電話號碼搭配正規表達式檢查使用者輸入格式，其餘保持基礎限制不能提交空白資料
+
+
 

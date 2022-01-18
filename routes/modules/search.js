@@ -5,7 +5,7 @@ const router = express.Router()
 const restaurantModel = require('../../models/restaurantModel')
 
 //搜索功能
-router.get('/', (req, res) => {
+router.get('/search', (req, res) => {
   const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
   const reg = new RegExp(keyword, 'i')
 

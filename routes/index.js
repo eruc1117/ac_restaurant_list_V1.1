@@ -14,7 +14,7 @@ router.use('/restaurants', restaurants)
 
 const search = require('./modules/search')
 // 將網址結構符合 /search 字串開頭導向 search模組 
-router.use('/restaurants', search)
+router.use('/search', search)
 
 
 // 匯出路由器

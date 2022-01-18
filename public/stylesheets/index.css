@@ -101,15 +101,3 @@ header {
   }
   
 }
-.searchbar {
-  display: flex;
-  margin: auto;
-}
-
-.dropdown {
-  margin-left: 200px;
-}
-
-#search {
-  width: 240px;
-}

@@ -1,14 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST">
+      <form action="/createrestaurant?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="restaurantName">id</label>
+          <input type="text" class="form-control" name="id" value="{{id}} " readonly>
+        </div>
         <div class="form-group">
           <label for="restaurantName">Name</label>
-          <input type="text" class="form-control" name="name" value="{{restaurant.name}} " required>
+          <input type="text" class="form-control" name="name" value="" required>
         </div>
         <div class="form-group">
           <label for="restaurantName_en">Name_en</label>
-          <input type="text" class="form-control" name="name_en" value="{{restaurant.name_en}}" required>
+          <input type="text" class="form-control" name="name_en" value="" required>
           <small id="emailHelp" class="form-text text-muted">隨便寫點英文</small>
         </div>
         <div class="form-group">
@@ -19,49 +23,46 @@
 
         <div class="form-group">
           <label for="restaurantImage">Image</label>
-          <input type="text" class="form-control" id="imageInupt" name="image" value="{{restaurant.image}}" required>
+          <input type="text" class="form-control" id="imageInupt" name="image" value="" required>
           <small id="imageHelp" class="form-text text-muted">這邊只能用網址啦</small>
           <div>
             <!--增加圖片預覽-->
-            <img src="{{restaurant.image}}" id="preview" style="width: 300px; height: 200px;" alt="你打錯了">
+            <img src="" id="preview" style="width: 300px; height: 200px;" alt="你打錯了">
             <button type="button" id="previewButton" class="btn btn-primary">預覽</button>
           </div>
 
         </div>
         <div class="form-group">
           <label for="restaurantLocation">Location</label>
-          <input type="text" class="form-control" name="location" value="{{restaurant.location}}" required>
+          <input type="text" class="form-control" name="location" value="" required>
           <small id="emailHelp" class="form-text text-muted">隨便寫</small>
         </div>
 
         <div class="form-group">
-          <input type="tel" class="form-control text-center" name="phone" value="{{restaurant.phone}}"
-            pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}">
+          <input type="tel" class="form-control text-center" name="phone" value="" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}">
           <!--決定電話號碼格式-->
           <small id="emailHelp" class="form-text text-muted">格式:xx-xxxx-xxxx</small>
         </div>
 
         <div class="form-group">
           <label for="restaurantGoogleMap">GoogleMap</label>
-          <input type="text" class="form-control" name="google_map" value="{{restaurant.google_map}}" required>
+          <input type="text" class="form-control" name="google_map" value="" required>
           <small id="emailHelp" class="form-text text-muted">隨便寫</small>
         </div>
 
         <div class="form-group">
           <label for="customRange3">Rating</label>
-          <div class="edit-me" id="rating">{{restaurant.rating}}</div>
-          <input type="range" class="custom-range" id="ratingRange" name="rating" value="{{restaurant.rating}}" min=0
-            max=5 step=0.1>
+          <div class="edit-me" id="rating"></div>
+          <input type="range" class="custom-range" id="ratingRange" name="rating" value="" min=0 max=5 step=0.1>
           <!--增加數字顯示-->
         </div>
 
         <div class=" form-group">
           <label for="restaurantDescription">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlTextarea1" name="description"
-            value="{{restaurant.description}}" required>
+          <input type="text" class="form-control" id="exampleFormControlTextarea1" name="description" value="" required>
           <!--原本要用<textarea>，不過<textarea>不支援input-->
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">create</button>
         <a href="/">Home</a>
       </form>
     </div>

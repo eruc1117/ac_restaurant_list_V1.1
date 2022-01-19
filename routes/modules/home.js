@@ -4,6 +4,9 @@ const router = express.Router()
 // 引用 restaurantModel
 const restaurantModel = require('../../models/restaurantModel')
 const modules = require('../../models/modules')
+
+const db = require('../../config/mongoose')
+
 // 定義首頁路由
 router.get('/', (req, res) => {
   restaurantModel.find()
@@ -13,7 +16,7 @@ router.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
-router.get('/:sortName', (req, res) => {
+router.get('/sort/:name', (req, res) => {
   let sortfunction
   const sortName = req.params.sort
   sortName === 'atoz' ?
@@ -44,5 +47,25 @@ router.get('/search', (req, res) => {
       : res.render('index', { restaurantList }))
     .catch(error => console.log('error:' + error))
 })
+//新增餐廳
+router.get('/create', (req, res) => {
+  restaurantModel.find()
+    .lean()
+    .sort({ id: -1 })
+    .then(id => res.render('createRestaurant', { id: (id[0].id + 1) })
+      .catch(error => console.error(error)))
+})
+
+router.put('/createrestaurant', (req, res) => {
+  const body = (req.body)
+  let newBody = modules.createNew(body)
+  restaurantModel.create(newBody)
+  restaurantModel.find()//會抓不到新增的餐廳
+    .lean()
+    .sort({ id: 1 })
+    .then(restaurantList => res.render('index', { restaurantList }))
+    .catch(error => console.error(error))
+})
+
 // 匯出路由模組
 module.exports = router

@@ -48,7 +48,21 @@ function bodyDataEdit(listBody) {
   listBody.name === listBody.name_en ?
     listBody.sameName = false :
     listBody.sameName = true
-  listBody
+  console.log(listBody)
+  return listBody
+}
+
+function createNew(listBody) {
+  listBody.id = Number(listBody.id.trim())
+  listBody.name = listBody.name.trim()
+  listBody.name_en = listBody.name_en.trim()
+  listBody.category = listBody.category.trim()
+  listBody.location = listBody.location.trim()
+  listBody.description = listBody.description.trim()
+  listBody.name === listBody.name_en ?
+    listBody.sameName = false :
+    listBody.sameName = true
+  console.log(listBody)
   return listBody
 }
 
@@ -58,5 +72,6 @@ function bodyDataEdit(listBody) {
 module.exports = {
   removeBlank,
   predataEdit,
-  bodyDataEdit
+  bodyDataEdit,
+  createNew
 }

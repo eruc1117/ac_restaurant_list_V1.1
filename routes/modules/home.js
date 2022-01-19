@@ -12,34 +12,26 @@ router.get('/', (req, res) => {
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
-router.get('/atoz', (req, res) => {
+
+router.get('/:sortName', (req, res) => {
+  let sortfunction
+  const sortName = req.params.sort
+  sortName === 'atoz' ?
+    sortfunction = { name: 1 } :
+    sortName === 'ztoa' ?
+      sortfunction = { name: -1 } :
+      sortName === 'category' ?
+        sortfunction = { category: 1 } :
+        sortName === 'area' ?
+          sortfunction = { location: 1 } :
+          sortfunction = { id: 1 }
   restaurantModel.find()
     .lean()
-    .sort({ name: 1 })
+    .sort(sortfunction)
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
-router.get('/ztoa', (req, res) => {
-  restaurantModel.find()
-    .lean()
-    .sort({ name: -1 })
-    .then(restaurantList => res.render('index', { restaurantList }))
-    .catch(error => console.error(error))
-})
-router.get('/category', (req, res) => {
-  restaurantModel.find()
-    .lean()
-    .sort({ category: 1 })
-    .then(restaurantList => res.render('index', { restaurantList }))
-    .catch(error => console.error(error))
-})
-router.get('/area', (req, res) => {
-  restaurantModel.find()
-    .lean()
-    .sort({ location: 1 })
-    .then(restaurantList => res.render('index', { restaurantList }))
-    .catch(error => console.error(error))
-})
+
 
 router.get('/search', (req, res) => {
   const keyword = modules.removeBlank(req.query.keyword).toLowerCase()

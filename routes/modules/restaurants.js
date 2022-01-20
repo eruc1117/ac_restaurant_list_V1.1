@@ -17,7 +17,7 @@ router.get('/detail/:id', (req, res) => {
 //修改頁面
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  return restaurantModel.findById(id)
+  restaurantModel.findById(id)
     .lean()
     .then(restaurant => res.render('editrestaurant', { restaurant }))
     .catch(error => console.error(error))
@@ -40,6 +40,8 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
+
 
 // 匯出路由模組
 module.exports = router

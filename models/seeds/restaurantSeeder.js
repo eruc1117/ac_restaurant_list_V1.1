@@ -13,19 +13,7 @@ const restaurantModel = require('../restaurantModel')
 db.once('open', () => {
   console.log('mongodb connected!')
   for (element of restaurantList) {
-    restaurantModel.create({
-      id: element['id'],
-      name: element['name'],
-      name_en: element['name_en'],
-      category: element['category'],
-      image: element['image'],
-      location: element['location'],
-      phone: element['phone'],
-      google_map: element['google_map'],
-      rating: element['rating'],
-      description: element['description'],
-      sameName: element['sameName']
-    })
+    restaurantModel.create(element)
   }
   console.log('done')
 })

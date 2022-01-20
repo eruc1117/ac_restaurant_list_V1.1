@@ -45,10 +45,7 @@ function bodyDataEdit(listBody) {
   listBody.category = removeBlank(listBody.category)
   listBody.location = removeBlank(listBody.location)
   listBody.description = removeBlank(listBody.description)
-  listBody.name === listBody.name_en ?
-    listBody.sameName = false :
-    listBody.sameName = true
-  console.log(listBody)
+  listBody.sameName = listBody.name !== listBody.name_en
   return listBody
 }
 
@@ -59,10 +56,7 @@ function createNew(listBody) {
   listBody.category = listBody.category.trim()
   listBody.location = listBody.location.trim()
   listBody.description = listBody.description.trim()
-  listBody.name === listBody.name_en ?
-    listBody.sameName = false :
-    listBody.sameName = true
-  console.log(listBody)
+  listBody.sameName = listBody.name !== listBody.name_en
   return listBody
 }
 

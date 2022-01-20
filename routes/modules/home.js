@@ -5,32 +5,22 @@ const router = express.Router()
 const restaurantModel = require('../../models/restaurantModel')
 const modules = require('../../models/modules')
 
-const db = require('../../config/mongoose')
-
 // 定義首頁路由
 router.get('/', (req, res) => {
   restaurantModel.find()
     .lean()
-    .sort({ id: 1 })
+    .sort({ ['id']: 1 })
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
 
 router.get('/sort/:name', (req, res) => {
-  let sortfunction
-  const sortName = req.params.sort
-  sortName === 'atoz' ?
-    sortfunction = { name: 1 } :
-    sortName === 'ztoa' ?
-      sortfunction = { name: -1 } :
-      sortName === 'category' ?
-        sortfunction = { category: 1 } :
-        sortName === 'area' ?
-          sortfunction = { location: 1 } :
-          sortfunction = { id: 1 }
+  const [property, sortBy] = req.params.name.split('_')
+  console.log([property])
+  console.log(sortBy)
   restaurantModel.find()
     .lean()
-    .sort(sortfunction)
+    .sort({ [property]: sortBy })
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
@@ -53,7 +43,7 @@ router.get('/create', (req, res) => {
     .lean()
     .sort({ id: -1 })
     .then(id => res.render('createRestaurant', { id: (id[0].id + 1) })
-      .catch(error => console.error(error)))
+      .catch(error => console.log(error)))
 })
 
 router.put('/createrestaurant', (req, res) => {
@@ -66,6 +56,7 @@ router.put('/createrestaurant', (req, res) => {
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
+
 
 // 匯出路由模組
 module.exports = router

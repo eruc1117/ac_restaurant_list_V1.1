@@ -16,8 +16,6 @@ router.get('/', (req, res) => {
 
 router.get('/sort/:name', (req, res) => {
   const [property, sortBy] = req.params.name.split('_')
-  console.log([property])
-  console.log(sortBy)
   restaurantModel.find()
     .lean()
     .sort({ [property]: sortBy })
@@ -42,19 +40,15 @@ router.get('/create', (req, res) => {
   restaurantModel.find()
     .lean()
     .sort({ id: -1 })
-    .then(id => res.render('createRestaurant', { id: (id[0].id + 1) })
-      .catch(error => console.log(error)))
+    .then(id => res.render('createRestaurant', { id: (id[0].id + 1) }))
+    .catch(error => console.log(error))
 })
 
 router.put('/createrestaurant', (req, res) => {
   const body = (req.body)
   let newBody = modules.createNew(body)
   restaurantModel.create(newBody)
-  restaurantModel.find()//會抓不到新增的餐廳
-    .lean()
-    .sort({ id: 1 })
-    .then(restaurantList => res.render('index', { restaurantList }))
-    .catch(error => console.error(error))
+  res.redirect('/')
 })
 
 

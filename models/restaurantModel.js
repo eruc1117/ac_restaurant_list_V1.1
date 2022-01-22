@@ -28,12 +28,18 @@ const restaurantSchema = new Schema({
   },
   location: {
     type: String,
-    required: true,
+    required: [true, 'Where is the restaurant?'],
     trim: true
   },
   phone: {
     type: String,
     set: modules.phoneSet,
+    validate: {
+      validator: function (phoneNumber) {
+        return /\d{2}-\d{4}-\d{4}/.test(phoneNumber);
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    },
     required: true
   },
   google_map: {
@@ -43,6 +49,8 @@ const restaurantSchema = new Schema({
   },
   rating: {
     type: Number,
+    man: 0,
+    max: 5,
     required: true
   },
   description: {

@@ -14,3 +14,6 @@ previewButton.addEventListener('click', () => {
 })
 
 //Uncaught TypeError: Cannot read properties of null (reading 'addEventListener') at frontEnd.js: 3: 13 目前沒有影響吧？
+
+
+console.log(1)

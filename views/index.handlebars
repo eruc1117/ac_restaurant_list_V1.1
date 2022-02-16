@@ -16,7 +16,7 @@
     </div>
     <div class="col-md text-light">blank</div>
     <div class="sortbutton">
-      <form action="/?_method=GET" method="POST">
+      <form action="/user?_method=GET" method="POST">
         <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" id="test">
           sort
@@ -38,7 +38,7 @@
       <div class="card-columns">
         {{#each restaurantList}}
         <div class="card mb-3" style="height: 350px">
-          <a href=" ./restaurants/detail/{{ this._id }}" class="text-secondary ">
+          <a href=" ./crud/detail/{{ this._id }}" class="text-secondary ">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
           </a>
           <div class="card-body p-3">
@@ -60,17 +60,17 @@
           </div>
           {{#if this.sameName}}
           <div class="mt-0 text-right">
-            <a href="/restaurants/{{ this._id }}?_method=GET">edit</a>
-            <a href="/restaurants/detail/{{ this._id }}?_method=GET">Detail</a>
-            <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+            <a href="/crud/{{ this._id }}?_method=GET">edit</a>
+            <a href="/crud/detail/{{ this._id }}?_method=GET">Detail</a>
+            <form action="/crud/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
               <button type="submit">delete</button>
             </form>
           </div>
           {{else}}
           <div class="mt-4 text-right">
-            <a href="/restaurants/{{ this._id }}?_method=GET">edit</a>
-            <a href="/restaurants/detail/{{ this._id }}?_method=GET">Detail</a>
-            <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+            <a href="/crud/{{ this._id }}?_method=GET">edit</a>
+            <a href="/crud/detail/{{ this._id }}?_method=GET">Detail</a>
+            <form action="/crud/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
               <button type="submit">delete</button>
             </form>
           </div>

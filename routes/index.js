@@ -8,9 +8,14 @@ const home = require('./modules/home')
 // 將網址結構符合 / 字串的 request 導向 home 模組 
 router.use('/', home)
 
-const restaurants = require('./modules/restaurants')
+// 引入 restaurantList 模組程式碼
+const restaurantList = require('./modules/restaurantList')
+// 將網址結構符合 / 字串的 request 導向 home 模組 
+router.use('/user', restaurantList)
+
+const crud = require('./modules/crud')
 // 將網址結構符合 /restaurants 字串開頭的 request 導向 restaurants 模組 
-router.use('/restaurants', restaurants)
+router.use('/crud', crud)
 
 
 

@@ -5,7 +5,7 @@ const modules = require('../../models/modules')
 
 
 router.get('/', (req, res) => {
-  res.render('home')
+  res.render('login')
 })
 
 // 匯出路由模組

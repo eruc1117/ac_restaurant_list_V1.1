@@ -2,23 +2,27 @@
   <h1 class="text-center">
     Register
   </h1>
-  <div class="login mt-5 mx-auto ">
-    <div class="d-flex flex-column">
-      <label class="mx-auto" for="user">User Name</label>
-      <input type="text" class="mb-4 w-75 mx-auto" placeholder="User Name" aria-label="User email" id="user">
-      <label class="mx-auto" for="user">User Email</label>
-      <input type="text" class="mb-4 w-75 mx-auto" placeholder="User email" aria-label="User email" id="user">
-      <label class="mx-auto" for="password">Password</label>
-      <input type="text" class=" mb-4 w-75 mx-auto" placeholder="Password" aria-label="User Password" id="password">
-      <label class="mx-auto" for="password">Confirm Password</label>
-      <input type="text" class=" mb-5 w-75 mx-auto" placeholder="Confirm Password" aria-label="User Password"
-        id="password">
+  <form action="/register" method="post">
+    <div class="login mt-5 mx-auto ">
+      <div class="d-flex flex-column">
+        <label class="mx-auto" for="user">User Name</label>
+        <input type="text" class="mb-4 w-75 mx-auto" placeholder="User Name" name="name" value="{{name}}"
+          aria-label="User email" id="user">
+        <label class="mx-auto" for="user">User Email</label>
+        <input type="text" class="mb-4 w-75 mx-auto" placeholder="User email" aria-label="User email" name="email"
+          value="{{email}}">
+        <label class="mx-auto" for="password">Password</label>
+        <input type="text" class=" mb-4 w-75 mx-auto" placeholder="Password" aria-label="User Password" name="password"
+          value="{{password}}" id="password">
+        <label class="mx-auto" for="password">Confirm Password</label>
+        <input type="text" class=" mb-5 w-75 mx-auto" placeholder="Confirm Password" aria-label="User Password "
+          name="confirmPassword" value="{{confirmPassword}}">
+      </div>
     </div>
-  </div>
-  <p class="lead mt-4 text-center">
-    Have An Account? <a href="/">Login</a>
-  </p>
-  <div class="d-flex justify-content-center" id="cantrip">
-    <button type="button" class="btn btn-dark w-50 mb-2" id="login">Register</button>
-  </div>
+    <p class="lead mt-4 text-center">
+      Have An Account? <a href="/">Login</a>
+    </p>
+    <div class="d-flex justify-content-center" id="cantrip">
+      <button type="submit" class="btn btn-dark w-50 mb-2" id="login">Register</button>
+    </div>
 </div>

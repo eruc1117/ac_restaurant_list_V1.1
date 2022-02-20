@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 
 const session = require('express-session')
-
+const usePassport = require('./config/passport')
 // 引用路由器
 const routes = require('./routes')
 
@@ -47,7 +47,7 @@ app.use(methodOverride('_method'))
 app.use(express.static('public'))
 //表單資料處理
 app.use(express.urlencoded({ extended: true }))
-
+usePassport(app)
 // 將 request 導入路由器
 app.use(routes)
 

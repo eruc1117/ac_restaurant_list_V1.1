@@ -22,10 +22,10 @@
           sort
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="/sort/name_asc">A -> Z</a>
-          <a class="dropdown-item" href="/sort/name_desc">Z -> A</a>
-          <a class="dropdown-item" href="/sort/category_asc">種類</a>
-          <a class="dropdown-item" href="/sort/location_asc">地區</a>
+          <a class="dropdown-item" href="/user/sort/name_asc">A -> Z</a>
+          <a class="dropdown-item" href="/user/sort/name_desc">Z -> A</a>
+          <a class="dropdown-item" href="/user/sort/category_asc">種類</a>
+          <a class="dropdown-item" href="/user/sort/location_asc">地區</a>
       </form>
     </div>
   </div>
@@ -38,7 +38,7 @@
       <div class="card-columns">
         {{#each restaurantList}}
         <div class="card mb-3" style="height: 350px">
-          <a href=" ./crud/detail/{{ this._id }}" class="text-secondary ">
+          <a href=" ./crud/detail/{{ this.id }}" class="text-secondary ">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
           </a>
           <div class="card-body p-3">
@@ -60,9 +60,9 @@
           </div>
           {{#if this.sameName}}
           <div class="mt-0 text-right">
-            <a href="/crud/{{ this._id }}?_method=GET">edit</a>
-            <a href="/crud/detail/{{ this._id }}?_method=GET">Detail</a>
-            <form action="/crud/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+            <a href="/crud/{{ this.id }}?_method=GET">edit</a>
+            <a href="/crud/detail/{{ this.id }}?_method=GET">Detail</a>
+            <form action="/crud/{{ this.id }}?_method=DELETE" method="POST" style="display: inline;">
               <button type="submit">delete</button>
             </form>
           </div>

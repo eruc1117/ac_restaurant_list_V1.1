@@ -7,16 +7,27 @@ const modules = require('../../models/modules')
 
 //新增餐廳
 router.get('/create', (req, res) => {
-  restaurantModel.find()
+  const userId = req.user._id
+  restaurantModel.find({ userId })
     .lean()
     .sort({ id: -1 })
-    .then(id => res.render('createRestaurant', { id: (id[0].id + 1) }))
+    .then(id => res.render('createRestaurant', { id: countId(id) }))
     .catch(error => console.log(error))
 })
 
+function countId(array) {
+  if (array.length !== 0) {
+    return Number(array[0].id) + 1
+  } else {
+    return 1
+  }
+}
+
 router.put('/create', (req, res) => {
   const body = (req.body)
+  const userId = req.user._id
   let newBody = modules.createNew(body)
+  newBody.userId = userId
   restaurantModel.create(newBody)
   res.redirect('/user')
 })
@@ -24,7 +35,8 @@ router.put('/create', (req, res) => {
 //顯示餐廳詳細資料
 router.get('/detail/:id', (req, res) => {
   const id = req.params.id
-  return restaurantModel.findById(id)
+  const userId = req.user._id
+  return restaurantModel.findOne({ id })
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.error(error))
@@ -32,26 +44,29 @@ router.get('/detail/:id', (req, res) => {
 
 //修改頁面
 router.get('/:id', (req, res) => {
+  const userId = req.user._id
   const id = req.params.id
-  restaurantModel.findById(id)
+  restaurantModel.findOne({ id, userId })
     .lean()
     .then(restaurant => res.render('editrestaurant', { restaurant }))
     .catch(error => console.error(error))
 })
 
 router.put('/:id', (req, res) => {
-  const restaurant = req.params.id
+  const userId = req.user._id
+  const id = req.params.id
   const body = (req.body)
   let newBody = modules.bodyDataEdit(body)
-  restaurantModel.findByIdAndUpdate(restaurant, newBody)
-    .then(() => res.redirect(`/crud/detail/${restaurant}`))
+  return restaurantModel.findOneAndUpdate({ id, userId }, newBody)
+    .then(() => res.redirect(`/crud/detail/${id}`))
     .catch(error => console.log(error))
 })
 
 //刪除功能
 router.delete('/:id', (req, res) => {
+  const userId = req.user._id
   const id = req.params.id
-  return restaurantModel.findById(id)
+  return restaurantModel.findOne({ id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/user'))
     .catch(error => console.log(error))
@@ -61,3 +76,4 @@ router.delete('/:id', (req, res) => {
 
 // 匯出路由模組
 module.exports = router
+

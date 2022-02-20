@@ -7,7 +7,8 @@ const modules = require('../../models/modules')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
-  restaurantModel.find()
+  const userId = req.user._id
+  restaurantModel.find({ userId })
     .lean()
     .sort({ ['id']: 1 })
     .then(restaurantList => res.render('index', { restaurantList }))
@@ -15,8 +16,9 @@ router.get('/', (req, res) => {
 })
 
 router.get('/sort/:name', (req, res) => {
+  const userId = req.user._id
   const [property, sortBy] = req.params.name.split('_')
-  restaurantModel.find()
+  restaurantModel.find({ userId })
     .lean()
     .sort({ [property]: sortBy })
     .then(restaurantList => res.render('index', { restaurantList }))
@@ -27,8 +29,8 @@ router.get('/sort/:name', (req, res) => {
 router.get('/search', (req, res) => {
   const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
   const reg = new RegExp(keyword, 'i')
-
-  restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }] })
+  const userId = req.user._id
+  restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }], userId })
     .lean()
     .then(restaurantList => restaurantList.length === 0
       ? res.render('nonsearchResult')

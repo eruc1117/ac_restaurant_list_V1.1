@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const session = require('express-session')
+
 // 引用路由器
 const routes = require('./routes')
 
@@ -31,6 +33,12 @@ const modules = require('./models/modules')
 app.engine('.handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 app.set('views', './views');
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 //使用method override
 app.use(methodOverride('_method'))

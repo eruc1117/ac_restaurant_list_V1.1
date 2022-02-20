@@ -10,14 +10,30 @@ router.get('/', (req, res) => {
 // routes/modules/users.js
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/user',
-  failureRedirect: '/'
+  failureRedirect: '/',
+  failureMessage: true
 }))
+
+
 router.get('/register', (req, res) => {
   res.render('register')
 })
 router.post('/register', (req, res) => {
   // 取得註冊表單參數
   const userData = req.body
+  const errors = []
+  if (!userData.email || !userData.password || !userData.confirmPassword) {
+    errors.push({ message: '所有欄位都是必填。' })
+  }
+  if (password !== confirmPassword) {
+    errors.push({ message: '密碼與確認密碼不相符！' })
+  }
+  if (errors.length) {
+    return res.render('register', {
+      errors,
+      info: userData
+    })
+  }
   // 檢查使用者是否已經註冊
   try {
     repeatCheck(userData)
@@ -38,6 +54,7 @@ router.post('/register', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/')
 })
 

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/eruc1117/ac_restaurant_list_V1.1#readme",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",

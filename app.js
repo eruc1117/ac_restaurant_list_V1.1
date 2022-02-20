@@ -11,7 +11,8 @@ const routes = require('./routes')
 
 //載入methodoverride
 const methodOverride = require('method-override')
-
+//載入connect-flash
+const flash = require('connect-flash')
 //載入handlebars
 const exhdbs = require('express-handlebars')
 
@@ -20,13 +21,6 @@ const handlebars = exhdbs.create({
 
 //連線mongoose
 require('./config/mongoose')
-
-//載入restaurantModel
-const restaurantModel = require('./models/restaurantModel')
-
-
-//載入modules，使用自製模組
-const modules = require('./models/modules')
 
 //設定使用handlebars
 //express-handlebars ^5到^6的改動
@@ -48,9 +42,13 @@ app.use(express.static('public'))
 //表單資料處理
 app.use(express.urlencoded({ extended: true }))
 usePassport(app)
+app.use(flash())
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated()
-  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()//true or false
+  res.locals.user = req.user // passport.js 中User.findOne({ email }),user回傳
+  res.locals.success_msg = req.flash('success_msg')  // 設定 success_msg 訊息
+  res.locals.warning_msg = req.flash('warning_msg')  // 設定 warning_msg 訊息
+  res.locals.msg = req.session.messages// passport.js 中done(null, false, { message: 'That email is not registered!' })的message回傳
   next()
 })
 // 將 request 導入路由器

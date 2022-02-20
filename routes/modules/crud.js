@@ -11,20 +11,16 @@ router.get('/create', (req, res) => {
   restaurantModel.find({ userId })
     .lean()
     .sort({ id: -1 })
-    .then(id => res.render('createRestaurant', { id: countId(id) }))
+    .then(id => res.render('createRestaurant', {
+      id: id.length !== 0 ?
+        Number(array[0].id) + 1 :
+        1
+    }))
     .catch(error => console.log(error))
 })
 
-function countId(array) {
-  if (array.length !== 0) {
-    return Number(array[0].id) + 1
-  } else {
-    return 1
-  }
-}
-
 router.put('/create', (req, res) => {
-  const body = (req.body)
+  const body = req.body
   const userId = req.user._id
   let newBody = modules.createNew(body)
   newBody.userId = userId

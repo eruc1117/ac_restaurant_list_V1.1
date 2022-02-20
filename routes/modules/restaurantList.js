@@ -3,9 +3,8 @@ const express = require('express')
 const router = express.Router()
 // 引用 restaurantModel
 const restaurantModel = require('../../models/restaurantModel')
-const modules = require('../../models/modules')
 
-// 定義首頁路由
+// 設定登入後首頁
 router.get('/', (req, res) => {
   const userId = req.user._id
   restaurantModel.find({ userId })
@@ -14,7 +13,7 @@ router.get('/', (req, res) => {
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
-
+//餐廳排列方式
 router.get('/sort/:name', (req, res) => {
   const userId = req.user._id
   const [property, sortBy] = req.params.name.split('_')
@@ -24,10 +23,9 @@ router.get('/sort/:name', (req, res) => {
     .then(restaurantList => res.render('index', { restaurantList }))
     .catch(error => console.error(error))
 })
-
-
+//搜索餐廳
 router.get('/search', (req, res) => {
-  const keyword = modules.removeBlank(req.query.keyword).toLowerCase()
+  const keyword = req.query.keyword.toLowerCase().trim()
   const reg = new RegExp(keyword, 'i')
   const userId = req.user._id
   restaurantModel.find({ $or: [{ name: reg }, { name_en: reg }, { category: reg }], userId })

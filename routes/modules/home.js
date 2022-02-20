@@ -17,18 +17,14 @@ router.get('/register', (req, res) => {
 })
 router.post('/register', (req, res) => {
   // 取得註冊表單參數
-  const { name, email, password, confirmPassword } = req.body
   const userData = req.body
   // 檢查使用者是否已經註冊
   try {
     repeatCheck(userData)
-      .then(test => {
-        if (test.repeat) {
+      .then(data => {
+        if (data.repeat) {
           res.render('register', {
-            name,
-            email,
-            password,
-            confirmPassword
+            info: data.data
           })
         } else {
           res.redirect('/')
@@ -48,7 +44,7 @@ router.get('/logout', (req, res) => {
 module.exports = router
 
 async function repeatCheck(userData) {
-  let result = await User.findOne({ email: userData.email })
+  let result = await User.findOne({ email: userData.email }).lean()
   if (result) {
     console.log('User already exists.')
     return {

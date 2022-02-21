@@ -54,10 +54,6 @@ app.use((req, res, next) => {
 // 將 request 導入路由器
 app.use(routes)
 
-
-
-
-
 //設定port
 app.listen(port, () => {
   console.log(`localhost:${port}`)

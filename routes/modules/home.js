@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../../models/user')
 // 引用 passport
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 router.get('/', (req, res) => {
   res.render('login')
@@ -25,7 +26,7 @@ router.post('/register', (req, res) => {
   if (!userData.email || !userData.password || !userData.confirmPassword) {
     errors.push({ message: '所有欄位都是必填。' })
   }
-  if (password !== confirmPassword) {
+  if (userData.password !== userData.confirmPassword) {
     errors.push({ message: '密碼與確認密碼不相符！' })
   }
   if (errors.length) {
@@ -61,6 +62,7 @@ router.get('/logout', (req, res) => {
 module.exports = router
 
 async function repeatCheck(userData) {
+  const bcrypt = require('bcryptjs')
   let result = await User.findOne({ email: userData.email }).lean()
   if (result) {
     console.log('User already exists.')
@@ -68,11 +70,14 @@ async function repeatCheck(userData) {
       data: result, repeat: true
     }
   } else {
-    await User.create({
-      name: userData.name,
-      email: userData.email,
-      password: userData.password
-    })
+    bcrypt
+      .genSalt(10) // 產生「鹽」，並設定複雜度係數為 10
+      .then(salt => bcrypt.hash(userData.password, salt)) // 為使用者密碼「加鹽」，產生雜湊值
+      .then(hash => User.create({
+        name: userData.name,
+        email: userData.email,
+        password: hash// 用雜湊值取代原本的使用者密碼
+      }))
     return {
       data: userData, repeat: false
     }

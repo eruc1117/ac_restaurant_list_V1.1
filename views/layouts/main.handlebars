@@ -19,12 +19,9 @@
         {{#if isAuthenticated}}{{ user.name}}的{{/if}}餐廳清單
       </a>
       {{#if isAuthenticated}}
-      <a href="/logout" class="btn btn-outline-light">Logout</a>
-      {{else}}
-      <a href="/" class="btn btn-outline-light">Login</a>
+      <a href="/logout" class="btn btn-primary text-light">登出</a>
       {{/if}}
     </div>
-    <a href="/crud/create" class="btn btn-primary text-light">新增餐廳</a>
   </nav>
 
   <div class="banner"></div>

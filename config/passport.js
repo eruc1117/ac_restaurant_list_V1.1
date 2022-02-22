@@ -9,8 +9,9 @@ module.exports = app => {
   app.use(passport.session())
   // 設定本地登入策略
   passport.use(new LocalStrategy(
-    {
+    {//名稱設定錯誤會出現Missing credentials的flash訊息
       usernameField: 'email',
+      passwordField: 'password'
     },
     (email, password, done) => {
       User.findOne({ email })

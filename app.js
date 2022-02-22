@@ -16,7 +16,6 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash')
 //載入handlebars
 const exhdbs = require('express-handlebars')
-console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }

@@ -1,7 +1,8 @@
+require('dotenv').config()
 //設定express環境
 const express = require('express')
 const app = express()
-const port = 3000
+
 
 const session = require('express-session')
 const usePassport = require('./config/passport')
@@ -15,7 +16,11 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash')
 //載入handlebars
 const exhdbs = require('express-handlebars')
-
+console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+const port = process.env.PORT
 const handlebars = exhdbs.create({
 })
 
@@ -29,7 +34,7 @@ app.set('view engine', 'handlebars')
 app.set('views', './views');
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))

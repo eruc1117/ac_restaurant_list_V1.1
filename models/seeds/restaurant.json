@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Sababa 沙巴巴中東美食",
-      "name_en": "Sababa Pita Bar ",
+      "name_en": "Sababa Pita Bar",
       "category": "中東料理",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
       "location": "台北市羅斯福路三段 283 巷 17 號",
@@ -15,11 +15,11 @@
     {
       "id": 2,
       "name": "梅子鰻蒲燒專賣店",
-      "name_en": "Umeko Japanese Unagi House ",
+      "name_en": "Umeko Japanese Unagi House",
       "category": "日本料理",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5628/02.jpg",
       "location": "台北市中山區林森北路 107 巷 8 號",
-      "phone": "02 2521 2813",
+      "phone": " 02 2521 2813",
       "google_map": "https://goo.gl/maps/cUJEmFSRKyH2",
       "rating": 4.3,
       "description": "鰻魚、鰻魚飯、真空鰻魚"
@@ -27,7 +27,7 @@
     {
       "id": 3,
       "name": "ZIGA ZIGA",
-      "name_en": "Ziga Zaga ",
+      "name_en": "Ziga Zaga",
       "category": "義式餐廳",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5629/03.jpg",
       "location": "台北市信義區松壽路 2 號",

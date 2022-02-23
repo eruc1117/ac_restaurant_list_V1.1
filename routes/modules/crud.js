@@ -13,7 +13,7 @@ router.get('/create', (req, res) => {
     .sort({ id: -1 })
     .then(id => res.render('createRestaurant', {
       id: id.length !== 0 ?
-        Number(array[0].id) + 1 :
+        Number(id[0].id) + 1 :
         1
     }))
     .catch(error => console.log(error))

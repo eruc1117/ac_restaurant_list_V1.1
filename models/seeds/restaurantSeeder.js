@@ -40,6 +40,7 @@ async function createUser(element) {
 
 
 async function createRestaurantSeed(element) {
+  const what = await user.findOne({ email: 'user1@example.com' })//完全搞不明白為啥第一個await不起作用
   const userOne = await user.findOne({ email: 'user1@example.com' })
   const userTwo = await user.findOne({ email: 'user2@example.com' })
   if (element.id === 1 || element.id === 2 || element.id === 3) {
